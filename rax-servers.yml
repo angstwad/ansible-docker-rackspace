@@ -1,0 +1,28 @@
+---
+- name: Boot a Rackspace instance 
+  hosts: local
+  gather_facts: false
+  tasks:
+    - name: Boot single Rackspace; wait for it to come online
+      local_action:
+        module: rax
+        username: "{{ username }}"
+        api_key: "{{ api_key }}"
+        state: present
+        name: "{{ server_name }}"
+        image: "{{ image }}"
+        flavor: performance1-1
+        region: "{{ region }}"
+        wait: yes
+      register: rax
+
+    - name: Add server to hosts
+      local_action:
+        module: add_host
+        hostname: "{{ item.name }}"
+        ansible_ssh_host: "{{ item.rax_accessipv4 }}"
+        ansible_ssh_pass: "{{ item.rax_adminpass }}"
+        ansible_ssh_user: root
+        groupname: docker
+      with_items: rax.success
+      when: rax.action == 'create'
