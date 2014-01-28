@@ -14,7 +14,6 @@ With pip:
 
 ```
 $ ansible-galaxy install -p . angstwad.docker_ubuntu
-$ ansible-galaxy install -p . angstwad.docker_ubuntu_1204
 ```
 
 ## How to Use
