@@ -15,14 +15,4 @@
   roles:
     - angstwad.docker_ubuntu_1204
 
-- name: Server info
-  hosts: local
-  gather_facts: no
-  tasks:
-    - name: IP address for server
-      debug: 
-        msg: "Your server has IP address {{ hostvars[server_name]['ansible_ssh_host'] }}"
-
-    - name: Login information for server
-      debug: 
-        msg: "Admin password {{ hostvars[server_name]['ansible_ssh_pass'] }}"
+- include: rax-servers-info.yml
