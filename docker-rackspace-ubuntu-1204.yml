@@ -13,6 +13,6 @@
 - name: Install Docker on Rax Server
   hosts: docker
   roles:
-    - angstwad.docker_ubuntu_1204
+    - angstwad.docker_ubuntu
 
 - include: rax-servers-info.yml
