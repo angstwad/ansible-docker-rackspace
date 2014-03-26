@@ -1,7 +1,7 @@
 ---
 - name: Boot a Rackspace instance 
-  hosts: local
   gather_facts: false
+  hosts: localhost
   tasks:
     - name: Boot single Rackspace; wait for it to come online
       local_action:
@@ -23,6 +23,16 @@
         ansible_ssh_host: "{{ item.rax_accessipv4 }}"
         ansible_ssh_pass: "{{ item.rax_adminpass }}"
         ansible_ssh_user: root
-        groupname: docker
+        groupname: dockergroup
       with_items: rax.success
       when: rax.action == 'create'
+
+- name: Check server
+  gather_facts: false
+  hosts: docker
+  tasks:
+    - name: Wait for ssh availability
+      local_action:
+        module: wait_for
+        host: "{{ hostvars.docker.ansible_ssh_host }}"
+        port: 22
