@@ -21,4 +21,4 @@ $ ansible-galaxy install -p . angstwad.docker_ubuntu
 
 The playbooks will deploy a single Ubuntu 13.10 or 12.04 cloud instance; the naming convention should be obvious.  Modify the values of `playbooks/group_vars/all` for your account/environment, and run the appropriate playbook.  For example:
 
-`$ ansible-playbook docker-rackspace.yml`
+`$ ansible-playbook docker-rackspace-ubuntu.yml`
