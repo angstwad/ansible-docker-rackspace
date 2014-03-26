@@ -1,0 +1,5 @@
+---
+username: user
+api_key: apikey
+region: IAD
+server_name: docker
